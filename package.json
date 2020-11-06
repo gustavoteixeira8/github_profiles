@@ -1,0 +1,25 @@
+{
+  "name": "github_profiles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "webpack -w"
+  },
+  "author": "Gustavo Teixeira",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "webpack": "^5.1.3",
+    "webpack-cli": "^4.0.0"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "css-loader": "^5.0.0",
+    "regenerator-runtime": "^0.13.7",
+    "style-loader": "^2.0.0"
+  }
+}
