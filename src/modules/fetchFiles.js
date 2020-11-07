@@ -1,5 +1,5 @@
 import { newError, hasErrors } from './errors'
-import { addUserIntoDOM } from '../main'
+import { addUserIntoDOM } from './addIntoDOM'
 
 const fetchUser = async (text) => {
     const urlApi = `https://api.github.com/users/${text}`
@@ -7,7 +7,7 @@ const fetchUser = async (text) => {
     const response = await fetch(urlApi)
     
     const userJSON = await response.json()
-
+ 
     if(!hasErrors(response)) {
         newError('Username is not valid')
         return

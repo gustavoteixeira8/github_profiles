@@ -6,16 +6,12 @@
   !*** ./src/main.js ***!
   \*********************/
 /*! namespace exports */
-/*! export addUserIntoDOM [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/*! exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addUserIntoDOM": () => /* binding */ addUserIntoDOM
-/* harmony export */ });
 /* harmony import */ var core_js_stable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/stable */ "./node_modules/core-js/stable/index.js");
 /* harmony import */ var core_js_stable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_stable__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
@@ -32,6 +28,85 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+var form = document.querySelector('#form');
+form.addEventListener('submit', /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+    var inputText;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            e.preventDefault();
+            _context.prev = 1;
+            inputText = document.querySelector('#inputText');
+
+            if (inputText.value) {
+              _context.next = 6;
+              break;
+            }
+
+            (0,_modules_errors__WEBPACK_IMPORTED_MODULE_3__.newError)('Input cannot be empty');
+            return _context.abrupt("return");
+
+          case 6:
+            _context.next = 8;
+            return (0,_modules_fetchFiles__WEBPACK_IMPORTED_MODULE_4__.fetchUser)(inputText.value);
+
+          case 8:
+            _context.next = 13;
+            break;
+
+          case 10:
+            _context.prev = 10;
+            _context.t0 = _context["catch"](1);
+            (0,_modules_errors__WEBPACK_IMPORTED_MODULE_3__.newError)('ERROR');
+
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[1, 10]]);
+  }));
+
+  return function (_x) {
+    return _ref.apply(this, arguments);
+  };
+}());
+
+/***/ }),
+
+/***/ "./src/modules/addIntoDOM.js":
+/*!***********************************!*\
+  !*** ./src/modules/addIntoDOM.js ***!
+  \***********************************/
+/*! namespace exports */
+/*! export addRepoIntoDOM [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export addUserIntoDOM [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addUserIntoDOM": () => /* binding */ addUserIntoDOM,
+/* harmony export */   "addRepoIntoDOM": () => /* binding */ addRepoIntoDOM
+/* harmony export */ });
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./errors */ "./src/modules/errors.js");
+/* harmony import */ var _fetchFiles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetchFiles */ "./src/modules/fetchFiles.js");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+var addUserIntoDOM = function addUserIntoDOM(userJSON) {
+  var cardContainer = document.querySelector('#card-container');
+  cardContainer.innerHTML = "\n        <div class=\"d-md-flex\">\n            <div class=\"col-md-4\">\n                <img src=\"".concat(userJSON.avatar_url, "\" class=\"img-thumbnail\" alt=\"User image\">\n            </div>\n            <div class=\"col-md-8 text-black-50\">\n                <h3 class=\"mb-3\">\n                    <a href=\"").concat(userJSON.html_url, "\" target=\"_blank\" class=\"text-decoration-none text-dark\">\n                    ").concat(userJSON.login, "\n                    </a>\n                </h3>\n                <p>Followers: ").concat(userJSON.followers, "</p>\n                <p>Following: ").concat(userJSON.following, "</p>\n                <p>Repositories count: ").concat(userJSON.public_repos, "</p>\n                <div id=\"repositories\">\n                    Some repositories:<br>\n                </div>\n            </div> \n        </div>\n    ");
+  addRepoIntoDOM(userJSON);
+};
 
 var addRepoIntoDOM = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(userJSON) {
@@ -42,11 +117,11 @@ var addRepoIntoDOM = /*#__PURE__*/function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return (0,_modules_fetchFiles__WEBPACK_IMPORTED_MODULE_4__.fetchRepos)(userJSON);
+            return (0,_fetchFiles__WEBPACK_IMPORTED_MODULE_1__.fetchRepos)(userJSON);
 
           case 3:
             getRepos = _context.sent;
-            repos = getRepos.slice(0, 4);
+            repos = getRepos.slice(0, 5);
             reposContainer = document.querySelector('#repositories');
             repos.forEach(function (el) {
               reposContainer.innerHTML += "\n            <a href=\"".concat(el.html_url, "\" target=\"_blank\">\n                ").concat(el.full_name, "\n            </a><br>\n            ");
@@ -57,7 +132,7 @@ var addRepoIntoDOM = /*#__PURE__*/function () {
           case 9:
             _context.prev = 9;
             _context.t0 = _context["catch"](0);
-            (0,_modules_errors__WEBPACK_IMPORTED_MODULE_3__.newError)('ERROR');
+            (0,_errors__WEBPACK_IMPORTED_MODULE_0__.newError)('ERROR');
 
           case 12:
           case "end":
@@ -72,56 +147,7 @@ var addRepoIntoDOM = /*#__PURE__*/function () {
   };
 }();
 
-var addUserIntoDOM = function addUserIntoDOM(userJSON) {
-  var cardContainer = document.querySelector('#card-container');
-  cardContainer.innerHTML = "\n        <div class=\"d-md-flex\">\n            <div class=\"col-md-4\">\n                <img src=\"".concat(userJSON.avatar_url, "\" class=\"img-thumbnail\" alt=\"User image\">\n            </div>\n            <div class=\"col-md-8 text-black-50\">\n                <h3 class=\"mb-3\">\n                    <a href=\"").concat(userJSON.html_url, "\" target=\"_blank\" class=\"text-decoration-none text-dark\">\n                    ").concat(userJSON.login, "\n                    </a>\n                </h3>\n                <p>Followers: ").concat(userJSON.followers, "</p>\n                <p>Following: ").concat(userJSON.following, "</p>\n                <p>Repositories count: ").concat(userJSON.public_repos, "</p>\n                <div id=\"repositories\">\n                    Some repositories:<br>\n                </div>\n            </div> \n        </div>\n    ");
-  addRepoIntoDOM(userJSON);
-};
-var form = document.querySelector('#form');
-form.addEventListener('submit', /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e) {
-    var inputText;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            e.preventDefault();
-            _context2.prev = 1;
-            inputText = document.querySelector('#inputText');
 
-            if (inputText.value) {
-              _context2.next = 6;
-              break;
-            }
-
-            (0,_modules_errors__WEBPACK_IMPORTED_MODULE_3__.newError)('Input cannot be empty');
-            return _context2.abrupt("return");
-
-          case 6:
-            _context2.next = 8;
-            return (0,_modules_fetchFiles__WEBPACK_IMPORTED_MODULE_4__.fetchUser)(inputText.value);
-
-          case 8:
-            _context2.next = 13;
-            break;
-
-          case 10:
-            _context2.prev = 10;
-            _context2.t0 = _context2["catch"](1);
-            (0,_modules_errors__WEBPACK_IMPORTED_MODULE_3__.newError)('ERROR');
-
-          case 13:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, null, [[1, 10]]);
-  }));
-
-  return function (_x2) {
-    return _ref2.apply(this, arguments);
-  };
-}());
 
 /***/ }),
 
@@ -176,7 +202,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchRepos": () => /* binding */ fetchRepos
 /* harmony export */ });
 /* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./errors */ "./src/modules/errors.js");
-/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../main */ "./src/main.js");
+/* harmony import */ var _addIntoDOM__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addIntoDOM */ "./src/modules/addIntoDOM.js");
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -212,7 +238,7 @@ var fetchUser = /*#__PURE__*/function () {
             return _context.abrupt("return");
 
           case 10:
-            (0,_main__WEBPACK_IMPORTED_MODULE_1__.addUserIntoDOM)(userJSON);
+            (0,_addIntoDOM__WEBPACK_IMPORTED_MODULE_1__.addUserIntoDOM)(userJSON);
 
           case 11:
           case "end":
@@ -16785,8 +16811,8 @@ module.exports = function (list, options) {
 /************************************************************************/
 /******/ 	// startup
 /******/ 	// Load entry module
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__("./src/main.js");
+/******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map
